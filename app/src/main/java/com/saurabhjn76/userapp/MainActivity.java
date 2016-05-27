@@ -12,5 +12,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Firebase.setAndroidContext(this);
+
+    }
+    void wrtieData()
+    {
+        Firebase ref = new Firebase("https://salon-app-dad97.firebaseio.com/data");
+
     }
 }
+
