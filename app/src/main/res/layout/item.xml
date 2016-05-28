@@ -25,10 +25,39 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/salon_distance_label"
+            android:text="Distance:"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="40dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingTextView"
+            android:text="7.6/5"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="270dp"
+            android:textSize="20sp"/>
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rating"
+            style="?android:attr/ratingBarStyleSmall"
+            android:isIndicator="true"
+            android:stepSize="0.50"
+            android:layout_marginTop="40dp"
+            android:foregroundGravity="right"
+            android:layout_marginLeft="170dp"
+            android:rating="5.0"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/salon_distance"
             android:text="dsdsadsdsa"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:layout_marginTop="40dp"
+            android:layout_marginLeft="70dp"
             />
 
         <ImageView
@@ -39,6 +68,21 @@
             android:paddingTop="5dp"
             android:layout_marginTop="70dp"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Address"
+            android:text="Address:"
+            android:layout_marginTop="230dp"
+            android:textSize="20sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AddressTextView"
+            android:text="Address:"
+            android:layout_marginTop="230dp"
+            android:layout_marginLeft="90dp"
+            android:textSize="14sp"/>
 
 
 

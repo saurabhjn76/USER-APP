@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,7 +25,10 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
         CardView cv;
         TextView salonName;
         TextView salonDistance;
+        TextView salonRating;
         ImageView salonPhoto;
+        RatingBar rb;
+        TextView salonAddress;
 
         SalonViewHolder(View itemView) {
             super(itemView);
@@ -32,7 +36,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
             salonName = (TextView)itemView.findViewById(R.id.salon_name);
             salonDistance = (TextView)itemView.findViewById(R.id.salon_distance);
             salonPhoto = (ImageView)itemView.findViewById(R.id.salon_photo);
-
+            rb=(RatingBar) itemView.findViewById(R.id.rating);
+            salonRating=(TextView)itemView.findViewById(R.id.ratingTextView);
+            salonAddress=(TextView)itemView.findViewById(R.id.AddressTextView);
         }
     }
 
@@ -67,6 +73,10 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
             case 2: personViewHolder.salonPhoto.setImageResource(R.drawable.slider_newton_highlands);
                         break;
         }
+        personViewHolder.rb.setRating((float)(salons.get(i).getRating())/1f);
+        personViewHolder.salonRating.setText((float) Math.round(salons.get(i).getRating()*10d)/10d + "/5");
+        personViewHolder.salonAddress.setText(salons.get(i).getAddressLine1()+" " +salons.get(i).getAddressLine2());
+
     }
     @Override
     public int getItemCount() {
