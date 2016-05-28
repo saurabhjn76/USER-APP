@@ -3,8 +3,10 @@ package com.saurabhjn76.userapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,7 +15,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Firebase.setAndroidContext(this);
-        writeData();
+       // writeData();
+        readData();
+
 
     }
     void writeData()
@@ -45,9 +49,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
+    }
 
-
-
+    void readData(){
+        Firebase ref = new Firebase("https://salon-app-dad97.firebaseio.com/data");
+        // Attach an listener to read the data at our posts reference
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                System.out.println("There are " + snapshot.getChildrenCount() + " salons");
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    Salon salon = postSnapshot.getValue(Salon.class);
+                    System.out.println(salon.getSalonName());
+                }
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
     }
 }
 
