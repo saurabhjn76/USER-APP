@@ -2,23 +2,43 @@ package com.saurabhjn76.userapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+
+    private RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Firebase.setAndroidContext(this);
+
        // writeData();
-        readData();
+        //readData();
+        rv = (RecyclerView)findViewById(R.id.rv);
+        rv.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+        rv.setLayoutManager(llm);
+        initializeAdapter();
 
-
+    }
+    private void initializeAdapter(){
+        //Log.e("dataa",salons.size()+"");
+        RVAdapter adapter = new RVAdapter();
+        rv.setAdapter(adapter);
+        readData(adapter);
     }
     void writeData()
     {
@@ -51,23 +71,33 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void readData(){
+    ArrayList<Salon> readData(final RVAdapter rv) {
         Firebase ref = new Firebase("https://salon-app-dad97.firebaseio.com/data");
+        final ArrayList<Salon> salons = new ArrayList<>();
         // Attach an listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+
                 System.out.println("There are " + snapshot.getChildrenCount() + " salons");
-                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Salon salon = postSnapshot.getValue(Salon.class);
-                    System.out.println(salon.getSalonName());
+                    // System.out.println(salon.getSalonName());
+                    Log.e("data", "" + salon);
+                    salons.add(salon);
+                    rv.add(salon);
+
                 }
+
             }
+
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
+
+        return salons;
     }
 }
 

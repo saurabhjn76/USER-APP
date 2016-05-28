@@ -27,7 +27,7 @@ public class Salon {
     }
 
     public String getSalonName() {
-        return salonName;
+        return this.salonName;
     }
     public String getAddressLine1() {
         return addressLine1;
@@ -44,7 +44,7 @@ public class Salon {
     }
 
     public double getDistance() {
-        return distance;
+        return this.distance;
     }
     public boolean getTv(){
         return tv;
