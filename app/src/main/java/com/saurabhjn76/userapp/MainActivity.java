@@ -1,12 +1,18 @@
 package com.saurabhjn76.userapp;
 
+import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -20,12 +26,27 @@ public class MainActivity extends AppCompatActivity {
 
 
     private RecyclerView rv;
+    private Toolbar toolbar;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Firebase.setAndroidContext(this);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        imageView = (ImageView) findViewById(R.id.action_calendar);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"calendar",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
 
        // writeData();
         //readData();
@@ -43,24 +64,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-   /* @Override*/
-   /* public boolean onOptionsItemSelected(MenuItem item) {
+   /* @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_sort_rating) {
-            fragment.sortOrder = "vote_average.desc";
-            fragment.moreParams = "vote_count.gte=50&include_video=false"; // you don't want shows with few votes
-        } else if (id == R.id.action_sort_popularity) {
-            fragment.sortOrder = "popularity.desc";
-            fragment.moreParams = "";
-        }
-        item.setChecked(true);
-        if (id == R.id.action_sort_popularity || id == R.id.action_sort_rating){
-            activeId = id;
-        } else if (id == R.id.action_favorites){
-            fragment.updateUI(true);
-            activeId = id;
-        }
+        if(id==R.id.action_divider1)
+            Toast.makeText(getApplicationContext(),"divider",Toast.LENGTH_SHORT);
         return super.onOptionsItemSelected(item);
     }*/
     private void initializeAdapter(){
