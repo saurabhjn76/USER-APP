@@ -1,8 +1,6 @@
 package com.saurabhjn76.userapp;
 
 import android.app.Dialog;
-import android.content.Intent;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,7 +20,6 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rv;
     private Toolbar toolbar;
     private ImageView imageView;
+    private ImageView imageViewSort;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         imageView = (ImageView) findViewById(R.id.action_calendar);
+        imageViewSort=(ImageView)findViewById(R.id.action_sort);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,9 +48,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        imageViewSort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Sorting",Toast.LENGTH_SHORT).show();
+                openSortBottomSheet();
+
+            }
+        });
 
 
-       // writeData();
+
+        // writeData();
         //readData();
         rv = (RecyclerView)findViewById(R.id.rv);
         rv.setHasFixedSize(true);
@@ -62,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void openBottomSheet() {
-        View view = getLayoutInflater().inflate(R.layout.bottom_sheet, null);
+        View view = getLayoutInflater().inflate(R.layout.bottom_sheet_filter, null);
         ImageView saveIcon = (ImageView)view.findViewById(R.id.save);
         ImageView editIcon = (ImageView)view.findViewById(R.id.edit);
         ImageView printIcon = (ImageView)view.findViewById(R.id.print);
@@ -98,6 +105,39 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Sharing...", Toast.LENGTH_LONG).show();
+                mBottomSheetDialog.dismiss();
+            }
+        });
+    }
+    public void openSortBottomSheet() {
+        View view = getLayoutInflater().inflate(R.layout.bottom_sheet_sort, null);
+        ImageView saveIcon = (ImageView)view.findViewById(R.id.save);
+        ImageView editIcon = (ImageView)view.findViewById(R.id.edit);
+        ImageView printIcon = (ImageView)view.findViewById(R.id.print);
+        final Dialog mBottomSheetDialog = new Dialog(MainActivity.this, R.style.MaterialDialogSheet);
+        mBottomSheetDialog.setContentView(view);
+        mBottomSheetDialog.setCancelable(true);
+        mBottomSheetDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        mBottomSheetDialog.getWindow().setGravity(Gravity.BOTTOM);
+        mBottomSheetDialog.show();
+        saveIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Saving...", Toast.LENGTH_LONG).show();
+                mBottomSheetDialog.dismiss();
+            }
+        });
+        editIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Editing...", Toast.LENGTH_LONG).show();
+                mBottomSheetDialog.dismiss();
+            }
+        });
+        printIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Printing...", Toast.LENGTH_LONG).show();
                 mBottomSheetDialog.dismiss();
             }
         });
