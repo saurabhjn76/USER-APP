@@ -1,5 +1,6 @@
 package com.saurabhjn76.userapp;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +9,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"calendar",Toast.LENGTH_SHORT).show();
+                openBottomSheet();
 
             }
         });
@@ -56,6 +60,47 @@ public class MainActivity extends AppCompatActivity {
         rv.setLayoutManager(llm);
         initializeAdapter();
 
+    }
+    public void openBottomSheet() {
+        View view = getLayoutInflater().inflate(R.layout.bottom_sheet, null);
+        ImageView saveIcon = (ImageView)view.findViewById(R.id.save);
+        ImageView editIcon = (ImageView)view.findViewById(R.id.edit);
+        ImageView printIcon = (ImageView)view.findViewById(R.id.print);
+        ImageView shareIcon = (ImageView)view.findViewById(R.id.print);
+        final Dialog mBottomSheetDialog = new Dialog(MainActivity.this, R.style.MaterialDialogSheet);
+        mBottomSheetDialog.setContentView(view);
+        mBottomSheetDialog.setCancelable(true);
+        mBottomSheetDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        mBottomSheetDialog.getWindow().setGravity(Gravity.BOTTOM);
+        mBottomSheetDialog.show();
+        saveIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Saving...", Toast.LENGTH_LONG).show();
+                mBottomSheetDialog.dismiss();
+            }
+        });
+        editIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Editing...", Toast.LENGTH_LONG).show();
+                mBottomSheetDialog.dismiss();
+            }
+        });
+        printIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Printing...", Toast.LENGTH_LONG).show();
+                mBottomSheetDialog.dismiss();
+            }
+        });
+        shareIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Sharing...", Toast.LENGTH_LONG).show();
+                mBottomSheetDialog.dismiss();
+            }
+        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
