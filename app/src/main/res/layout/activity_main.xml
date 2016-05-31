@@ -65,7 +65,7 @@
             android:layout_width="30dp"
             android:layout_height="26dp"
             android:layout_marginTop="2dp"
-            android:layout_marginLeft="45dp"
+            android:layout_marginLeft="50dp"
             android:id="@+id/action_divider1"
             android:src="@drawable/sorting"
             android:adjustViewBounds="true"
@@ -80,7 +80,7 @@
                 android:layout_gravity="top"
                 android:text="Sort"
                 android:layout_marginTop="1dp"
-                android:layout_marginLeft="45dp"/>
+                android:layout_marginLeft="50dp"/>
         </LinearLayout>
 
         <View android:layout_height="fill_parent"
