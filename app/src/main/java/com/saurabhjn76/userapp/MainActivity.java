@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         final Dialog mBottomSheetDialog = new Dialog(MainActivity.this, R.style.MaterialDialogSheet);
         mBottomSheetDialog.setContentView(view);
         mBottomSheetDialog.setCancelable(true);
-        mBottomSheetDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        mBottomSheetDialog.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         mBottomSheetDialog.getWindow().setGravity(Gravity.BOTTOM);
         mBottomSheetDialog.show();
         saveIcon.setOnClickListener(new View.OnClickListener() {

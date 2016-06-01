@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="32dp"
-    android:paddingTop="32dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_height="150dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="5dp"
+    android:elevation="30dp"
     android:orientation="vertical"
     android:layout_gravity="bottom">
     <LinearLayout
@@ -15,17 +21,43 @@
             <ImageView
                 android:id="@+id/save"
                 android:layout_width="wrap_content"
+                android:padding="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/ic_menu_save"
+
+                android:background="@drawable/ic_trending_up_black_18dp"
                 android:contentDescription="@string/app_name"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:baselineAligned="true">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack"
-                android:textSize="16sp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/save"/>
+                android:text="Price"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:textSize="8sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="3dp"
+                android:text="Low to High"/>
         </LinearLayout>
+        </LinearLayout>
+    <View android:layout_height="2px"
+        android:layout_width="fill_parent"
+        android:background="#90909090"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,35 +68,64 @@
                 android:id="@+id/edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/ic_menu_edit"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/ic_trending_down_black_18dp"
                 android:contentDescription="@string/app_name"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack"
-                android:textSize="16sp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/edit"/>
+                android:text="Price"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="8sp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="3dp"
+                    android:text="High to Low"/>
+                </LinearLayout>
         </LinearLayout>
+    <View android:layout_height="2px"
+        android:layout_width="fill_parent"
+        android:background="#90909090"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginLeft="10dp"
         android:orientation="horizontal"
         android:baselineAligned="false">
             <ImageView
                 android:id="@+id/print"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_margin="8dp"
-                android:background="@android:drawable/ic_popup_disk_full"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/distance"
                 android:contentDescription="@string/app_name"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:text="@string/print"/>
+                android:textSize="12sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:text="Distance"
+                android:textStyle="bold"/>
         </LinearLayout>
 </LinearLayout>
