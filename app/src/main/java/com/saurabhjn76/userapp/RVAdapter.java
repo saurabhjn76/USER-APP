@@ -36,8 +36,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
             salonName = (TextView)itemView.findViewById(R.id.salon_name);
             salonDistance = (TextView)itemView.findViewById(R.id.salon_distance);
             salonPhoto = (ImageView)itemView.findViewById(R.id.salon_photo);
-            rb=(RatingBar) itemView.findViewById(R.id.rating);
-            salonRating=(TextView)itemView.findViewById(R.id.ratingTextView);
+           // rb=(RatingBar) itemView.findViewById(R.id.rating);
+          //  salonRating=(TextView)itemView.findViewById(R.id.ratingTextView);
             salonAddress=(TextView)itemView.findViewById(R.id.AddressTextView);
         }
     }
@@ -64,7 +64,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
     @Override
     public void onBindViewHolder(SalonViewHolder personViewHolder, int i) {
         personViewHolder.salonName.setText(salons.get(i).getSalonName());
-        personViewHolder.salonDistance.setText(salons.get(i).getDistance()+"");
+        personViewHolder.salonDistance.setText(salons.get(i).getDistance()+" Km");
         switch(i%3) {
             case 0:  personViewHolder.salonPhoto.setImageResource(R.drawable.hair_inside_salon);
                         break;
@@ -73,8 +73,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
             case 2: personViewHolder.salonPhoto.setImageResource(R.drawable.slider_newton_highlands);
                         break;
         }
-        personViewHolder.rb.setRating((float)(salons.get(i).getRating())/1f);
-        personViewHolder.salonRating.setText((float) Math.round(salons.get(i).getRating()*10d)/10d + "/5");
+       // personViewHolder.rb.setRating((float)(salons.get(i).getRating())/1f);
+        //personViewHolder.salonRating.setText((float) Math.round(salons.get(i).getRating()*10d)/10d + "/5");
         personViewHolder.salonAddress.setText(salons.get(i).getAddressLine1()+" " +salons.get(i).getAddressLine2());
 
     }
