@@ -1,5 +1,8 @@
 package com.saurabhjn76.userapp;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +23,7 @@ import java.util.List;
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
 
     ArrayList<Salon> salons;
-
+    private Context context;
     public static class SalonViewHolder extends RecyclerView.ViewHolder {
 
         CardView cv;
@@ -64,18 +68,21 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
     @Override
     public void onBindViewHolder(SalonViewHolder personViewHolder, int i) {
         personViewHolder.salonName.setText(salons.get(i).getSalonName());
-        personViewHolder.salonDistance.setText(salons.get(i).getDistance()+" Km");
-        switch(i%3) {
-            case 0:  personViewHolder.salonPhoto.setImageResource(R.drawable.hair_inside_salon);
-                        break;
-            case 1: personViewHolder.salonPhoto.setImageResource(R.drawable.salon_4_full);
-                        break;
-            case 2: personViewHolder.salonPhoto.setImageResource(R.drawable.slider_newton_highlands);
-                        break;
+        personViewHolder.salonDistance.setText(salons.get(i).getDistance() + " Km");
+        switch (i % 3) {
+            case 0:
+                personViewHolder.salonPhoto.setImageResource(R.drawable.hair_inside_salon);
+                break;
+            case 1:
+                personViewHolder.salonPhoto.setImageResource(R.drawable.salon_4_full);
+                break;
+            case 2:
+                personViewHolder.salonPhoto.setImageResource(R.drawable.slider_newton_highlands);
+                break;
         }
-       // personViewHolder.rb.setRating((float)(salons.get(i).getRating())/1f);
+        // personViewHolder.rb.setRating((float)(salons.get(i).getRating())/1f);
         //personViewHolder.salonRating.setText((float) Math.round(salons.get(i).getRating()*10d)/10d + "/5");
-        personViewHolder.salonAddress.setText(salons.get(i).getAddressLine1()+" " +salons.get(i).getAddressLine2());
+        personViewHolder.salonAddress.setText(salons.get(i).getAddressLine1() + " " + salons.get(i).getAddressLine2());
 
     }
     @Override
@@ -88,4 +95,23 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
         salons.add(s);
         notifyItemInserted(0);
     }
+   static class MyViewHolder extends RecyclerView.ViewHolder{
+       private CardView cv;
+
+        public MyViewHolder(View itemLayoutView) {
+            super(itemLayoutView);
+            itemLayoutView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(v.getContext(), ProfileActivity.class);
+                   // v.getContext().startActivity(intent);
+                    Toast.makeText(v.getContext(), "os version is: " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+        }
+
+        };
 }
