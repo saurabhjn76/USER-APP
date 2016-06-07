@@ -2,6 +2,7 @@ package com.saurabhjn76.userapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -43,6 +44,19 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
            // rb=(RatingBar) itemView.findViewById(R.id.rating);
           //  salonRating=(TextView)itemView.findViewById(R.id.ratingTextView);
             salonAddress=(TextView)itemView.findViewById(R.id.AddressTextView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(v.getContext(), ProfileActivity.class);
+                    salonPhoto.buildDrawingCache();
+                    Bitmap bitmap = salonPhoto.getDrawingCache();
+                    intent.putExtra("BitmapImage", bitmap);
+                    v.getContext().startActivity(intent);
+                    Toast.makeText(v.getContext(), "os version is: " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
     }
 
@@ -95,23 +109,4 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
         salons.add(s);
         notifyItemInserted(0);
     }
-   static class MyViewHolder extends RecyclerView.ViewHolder{
-       private CardView cv;
-
-        public MyViewHolder(View itemLayoutView) {
-            super(itemLayoutView);
-            itemLayoutView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Intent intent = new Intent(v.getContext(), ProfileActivity.class);
-                   // v.getContext().startActivity(intent);
-                    Toast.makeText(v.getContext(), "os version is: " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
-                }
-            });
-
-
-        }
-
-        };
 }
