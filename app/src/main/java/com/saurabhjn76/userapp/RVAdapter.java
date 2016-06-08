@@ -15,6 +15,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
                     Intent intent = new Intent(v.getContext(), ProfileActivity.class);
                     salonPhoto.buildDrawingCache();
                     Bitmap bitmap = salonPhoto.getDrawingCache();
-                    intent.putExtra("BitmapImage", bitmap);
+                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
+                    intent.putExtra("byteArray", bs.toByteArray());
                     v.getContext().startActivity(intent);
                     Toast.makeText(v.getContext(), "os version is: " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 }
