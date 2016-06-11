@@ -14,10 +14,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -28,12 +30,11 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ImageView imageView;
     private ImageView imageViewSort;
-
+    private ValueEventListener valueEventListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Firebase.setAndroidContext(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        // writeData();
+        //writeData();
         //readData();
         rv = (RecyclerView)findViewById(R.id.rv);
         rv.setHasFixedSize(true);
@@ -165,7 +166,9 @@ public class MainActivity extends AppCompatActivity {
     }
     void writeData()
     {
-        Firebase ref = new Firebase("https://salon-app-dad97.firebaseio.com/data");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("salon-app-dad97/data");
+      //  Firebase ref = new Firebase("https://salon-app-dad97.firebaseio.com/data");
         Salon[] s= new Salon[10];
         s[0]=new Salon("Affinity Salon","1st Floor, Global Foyer Mall","Golf Course Road","Unisex",4.2,true,true,4);
         s[1]=new Salon("Neu Salonz","4th Floor","South Point Mall","Unisex",4.1,true,true,8);
@@ -195,13 +198,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     ArrayList<Salon> readData(final RVAdapter rv) {
-        Firebase ref = new Firebase("https://salon-app-dad97.firebaseio.com/data");
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("salon-app-dad97/data");
         final ArrayList<Salon> salons = new ArrayList<>();
         // Attach an listener to read the data at our posts reference
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-
+                //  Log.i(this, "Called getTestData()");
                 System.out.println("There are " + snapshot.getChildrenCount() + " salons");
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Salon salon = postSnapshot.getValue(Salon.class);
@@ -211,15 +216,13 @@ public class MainActivity extends AppCompatActivity {
                     rv.add(salon);
 
                 }
-
             }
 
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
+            public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: "+ databaseError.getMessage());
             }
         });
-
         return salons;
     }
 }
