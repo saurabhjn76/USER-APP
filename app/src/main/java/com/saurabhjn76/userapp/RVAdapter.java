@@ -55,6 +55,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
                     ByteArrayOutputStream bs = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
                     intent.putExtra("byteArray", bs.toByteArray());
+                    intent.putExtra("salon_name",salonName.getText());
+                    intent.putExtra("salon_distance",salonDistance.getText());
                     v.getContext().startActivity(intent);
                     Toast.makeText(v.getContext(), "os version is: " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 }
