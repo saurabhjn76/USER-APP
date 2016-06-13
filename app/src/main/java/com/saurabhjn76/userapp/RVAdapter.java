@@ -57,6 +57,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
                     intent.putExtra("byteArray", bs.toByteArray());
                     intent.putExtra("salon_name",salonName.getText());
                     intent.putExtra("salon_distance",salonDistance.getText());
+                    intent.putExtra("salon_address",salonAddress.getText());
                     v.getContext().startActivity(intent);
                     Toast.makeText(v.getContext(), "os version is: " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 }
