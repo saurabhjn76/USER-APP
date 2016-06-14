@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +22,8 @@ import java.util.ArrayList;
  */
 public class ProfileActivity extends AppCompatActivity {
 
+    private TextView salon_address;
+    private TextView salonName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +31,9 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent =getIntent();
         LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
-        TextView salonName=(TextView) findViewById(R.id.salon_profile_name);
+         salonName=(TextView) findViewById(R.id.salon_profile_name);
         TextView salon_distance=(TextView)findViewById(R.id.salon_profile_distance);
-        TextView salon_address=(TextView)findViewById(R.id.salon_profile_address);
+         salon_address=(TextView)findViewById(R.id.salon_profile_address);
         for (int i = 0; i <5; i++) {
             Toast.makeText(getApplicationContext(),"the...",Toast.LENGTH_SHORT).show();
             ImageView imageView = new ImageView(this);
@@ -68,6 +72,27 @@ public class ProfileActivity extends AppCompatActivity {
             salon_address.setText(bundle.getString("salon_address").toCharArray(),0,bundle.getString("salon_address").length());
         }
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.salon_profile_menu, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Take appropriate action for each action item click
+        switch (item.getItemId()) {
+            case R.id.action_map:
+                // search action
+                Intent intent = new Intent(ProfileActivity.this, MapsActivity.class);
+                intent.putExtra("salon_address",salon_address.getText());
+                intent.putExtra("salon_name",salonName.getText());
+                ProfileActivity.this.startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
 
