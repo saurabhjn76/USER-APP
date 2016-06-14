@@ -15,6 +15,10 @@
         <menu>
             <group android:id="@+id/group_sortOrder"
                 android:checkableBehavior="single">
+                <item android:id="@+id/action_search"
+                    android:title="Search"
+                    app:actionViewClass="android.support.v7.widget.SearchView"
+                    app:showAsAction="always"/>
             <item
                 android:id="@+id/action_sort_rating"
                 android:title="By Rating"/>
