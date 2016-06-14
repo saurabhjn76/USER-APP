@@ -1,6 +1,7 @@
 package com.saurabhjn76.userapp;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ImageView imageView;
     private ImageView imageViewSort;
+    private ImageView imageViewMap;
     private ValueEventListener valueEventListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         imageView = (ImageView) findViewById(R.id.action_calendar);
         imageViewSort=(ImageView)findViewById(R.id.action_sort);
+        imageViewMap=(ImageView)findViewById(R.id.action_map);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +57,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"Sorting",Toast.LENGTH_SHORT).show();
                 openSortBottomSheet();
+
+            }
+        });
+        imageViewMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Sorting",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                v.getContext().startActivity(intent);
 
             }
         });
