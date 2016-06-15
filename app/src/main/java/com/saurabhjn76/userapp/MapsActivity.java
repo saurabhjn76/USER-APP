@@ -26,7 +26,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 import java.util.Locale;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private String address=null;
@@ -85,8 +85,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
         LatLng gurgaon = new LatLng(28.481216, 77.019135);
         gurgaon=getLocationFromAddress(getApplicationContext(),address);
-        Toast.makeText(getApplicationContext(),salon_name,Toast.LENGTH_LONG).show();
-        mMap.addMarker(new MarkerOptions().position(gurgaon).title(salon_name));
+        Toast.makeText(getApplicationContext(),gurgaon.toString(),Toast.LENGTH_LONG).show();
+        try {
+            mMap.addMarker(new MarkerOptions().position(gurgaon).title(salon_name));
+        }
+        catch (Exception e)
+        {
+             gurgaon = new LatLng(28.481216, 77.019135);
+            mMap.addMarker(new MarkerOptions().position(gurgaon).title(salon_name));
+        }
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(gurgaon,15.0f));
 
 
@@ -100,8 +107,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
             address = coder.getFromLocationName(strAddress, 5);
             if (address == null) {
-                return null;
+                return new LatLng(28.481216, 77.019135);
             }
+
             Address location = address.get(0);
             location.getLatitude();
             location.getLongitude();
@@ -112,7 +120,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             ex.printStackTrace();
         }
-
+        if(p1==null)
+            return new LatLng(28.481216, 77.019135);
+        else
         return p1;
     }
 

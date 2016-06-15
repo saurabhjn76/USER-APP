@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
     private ImageView imageViewSort;
     private ImageView imageViewMap;
+    final ArrayList<Salon> salons = new ArrayList<>();
     private ValueEventListener valueEventListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +64,13 @@ public class MainActivity extends AppCompatActivity {
         imageViewMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Sorting",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                Toast.makeText(getApplicationContext(),"Map..",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(v.getContext(), Maps_toolbar_activity.class);
+                intent.putExtra("size",salons.size());
+                for(int i=0;i< salons.size();i++)
+                {
+                    intent.putExtra("Salon_address"+i,salons.get(i).getAddressLine1()+" " +salons.get(i).getAddressLine2());
+                }
                 v.getContext().startActivity(intent);
 
             }
@@ -213,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("salon-app-dad97/data");
-        final ArrayList<Salon> salons = new ArrayList<>();
+
         // Attach an listener to read the data at our posts reference
         ref.addValueEventListener( new ValueEventListener() {
             @Override
