@@ -110,6 +110,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalonViewHolder> {
         return salons.size();
     }
 
+
+
     public void add(Salon s)
     {
         salons.add(s);

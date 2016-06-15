@@ -3,14 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/activity_vertical_margin"
+
     tools:context="com.saurabhjn76.userapp.MainActivity">
+
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rv"
+        android:paddingTop="?attr/actionBarSize"
+        android:paddingBottom="50dp"
+        android:clipToPadding="false"
         />
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:id="@+id/location_toolbar">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Location: Current Location  >>"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorBackground"
+            android:id="@+id/textView"
+            />
+
+
+    </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -116,6 +138,8 @@
                 android:layout_marginLeft="50dp"/>
         </LinearLayout>
         </android.support.v7.widget.Toolbar>
+
+
 
 
 </RelativeLayout>

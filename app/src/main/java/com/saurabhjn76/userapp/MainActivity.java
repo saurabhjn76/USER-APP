@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
     private ImageView imageViewSort;
     private ImageView imageViewMap;
+    private Toolbar mToolbar;
     final ArrayList<Salon> salons = new ArrayList<>();
     private ValueEventListener valueEventListener;
     @Override
@@ -44,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.action_calendar);
         imageViewSort=(ImageView)findViewById(R.id.action_sort);
         imageViewMap=(ImageView)findViewById(R.id.action_map);
+        mToolbar=(Toolbar)findViewById(R.id.location_toolbar);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +89,31 @@ public class MainActivity extends AppCompatActivity {
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         rv.setLayoutManager(llm);
+        rv.setOnScrollListener(new HidingScrollListener() {
+            @Override
+            public void onHide() {
+                hideViews();
+            }
+            @Override
+            public void onShow() {
+                showViews();
+            }
+        });
         initializeAdapter();
 
+    }
+
+    private void hideViews() {
+        mToolbar.animate().translationY(-mToolbar.getHeight()).setInterpolator(new AccelerateInterpolator(1));
+
+      //  FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mFabButton.getLayoutParams();
+      //  int fabBottomMargin = lp.bottomMargin;
+      //  mFabButton.animate().translationY(mFabButton.getHeight()+fabBottomMargin).setInterpolator(new AccelerateInterpolator(2)).start();
+    }
+
+    private void showViews() {
+        mToolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(1));
+       // mFabButton.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
     }
     public void openBottomSheet() {
         View view = getLayoutInflater().inflate(R.layout.bottom_sheet_filter, null);
