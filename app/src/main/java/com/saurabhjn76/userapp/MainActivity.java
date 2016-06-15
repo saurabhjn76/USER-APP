@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         rv.setLayoutManager(llm);
+        rv.setNestedScrollingEnabled(true);
         rv.setOnScrollListener(new HidingScrollListener() {
             @Override
             public void onHide() {
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void hideViews() {
-        mToolbar.animate().translationY(-mToolbar.getHeight()).setInterpolator(new AccelerateInterpolator(1));
+        mToolbar.animate().translationY(-mToolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
 
       //  FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mFabButton.getLayoutParams();
       //  int fabBottomMargin = lp.bottomMargin;
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showViews() {
-        mToolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(1));
+        mToolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
        // mFabButton.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
     }
     public void openBottomSheet() {
