@@ -16,24 +16,23 @@
         android:paddingBottom="50dp"
         android:clipToPadding="false"
         />
-    <android.support.v7.widget.Toolbar
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:id="@+id/location_toolbar">
-        <TextView
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp" >
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Location: Current Location  >>"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColor="@color/colorBackground"
-            android:id="@+id/textView"
-            />
+            android:ems="10"
+            android:text="Please enter your place" >
 
+            <requestFocus />
+        </AutoCompleteTextView>
 
-    </android.support.v7.widget.Toolbar>
+    </LinearLayout>
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

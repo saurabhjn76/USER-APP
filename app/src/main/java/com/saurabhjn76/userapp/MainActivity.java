@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.AutoCompleteTextView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageViewSort;
     private ImageView imageViewMap;
     private Toolbar mToolbar;
+    private AutoCompleteTextView search;
     final ArrayList<Salon> salons = new ArrayList<>();
     private ValueEventListener valueEventListener;
     @Override
@@ -48,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.action_calendar);
         imageViewSort=(ImageView)findViewById(R.id.action_sort);
         imageViewMap=(ImageView)findViewById(R.id.action_map);
-        mToolbar=(Toolbar)findViewById(R.id.location_toolbar);
+        search=(AutoCompleteTextView)findViewById(R.id.autoCompleteTextView);
+       // mToolbar=(Toolbar)findViewById(R.id.location_toolbar);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +83,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    search.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(v.getContext(), GooglePlacesAutocompleteActivity.class);
+            v.getContext().startActivity(intent);
 
+        }
+    });
 
 
         //writeData();
@@ -90,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         rv.setLayoutManager(llm);
         rv.setNestedScrollingEnabled(true);
-        rv.setOnScrollListener(new HidingScrollListener() {
+        /*rv.setOnScrollListener(new HidingScrollListener() {
             @Override
             public void onHide() {
                 hideViews();
@@ -99,13 +109,14 @@ public class MainActivity extends AppCompatActivity {
             public void onShow() {
                 showViews();
             }
-        });
+        });*/
         initializeAdapter();
 
     }
 
+
     private void hideViews() {
-        mToolbar.animate().translationY(-mToolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
+       // mToolbar.animate().translationY(-mToolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
 
       //  FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mFabButton.getLayoutParams();
       //  int fabBottomMargin = lp.bottomMargin;
@@ -113,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showViews() {
-        mToolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
+      //  mToolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
        // mFabButton.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
     }
     public void openBottomSheet() {
