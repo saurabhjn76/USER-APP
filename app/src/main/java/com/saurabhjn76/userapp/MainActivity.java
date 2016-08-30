@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageViewSort;
     private ImageView imageViewMap;
     private Toolbar mToolbar;
-    private AutoCompleteTextView search;
     final ArrayList<Salon> salons = new ArrayList<>();
     private ValueEventListener valueEventListener;
     @Override
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.action_calendar);
         imageViewSort=(ImageView)findViewById(R.id.action_sort);
         imageViewMap=(ImageView)findViewById(R.id.action_map);
-        search=(AutoCompleteTextView)findViewById(R.id.autoCompleteTextView);
        // mToolbar=(Toolbar)findViewById(R.id.location_toolbar);
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -83,14 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    search.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(v.getContext(), GooglePlacesAutocompleteActivity.class);
-            v.getContext().startActivity(intent);
 
-        }
-    });
 
 
         //writeData();
@@ -272,7 +263,6 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("data", "" + salon);
                     salons.add(salon);
                     rv.add(salon);
-
                 }
             }
 
